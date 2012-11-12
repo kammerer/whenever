@@ -49,7 +49,7 @@ Capistrano::Configuration.instance(:must_exist).load do
             end
           end
 
-          run "cd #{fetch :latest_release} && #{fetch :whenever_command} #{fetch :whenever_update_flags}#{role_arg}#{stage_arg}", options
+          run "cd #{fetch :current_release} && #{fetch :whenever_command} #{fetch :whenever_update_flags}#{role_arg}#{stage_arg}", options
         end
       end
     end
@@ -68,7 +68,7 @@ Capistrano::Configuration.instance(:must_exist).load do
 
     task :clear_crontab do
       options = fetch(:whenever_options)
-      run "cd #{fetch :latest_release} && #{fetch :whenever_command} #{fetch :whenever_clear_flags}", options if find_servers(options).any?
+      run "cd #{fetch :current_release} && #{fetch :whenever_command} #{fetch :whenever_clear_flags}", options if find_servers(options).any?
     end
   end
 end
